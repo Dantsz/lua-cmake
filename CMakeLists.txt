@@ -17,6 +17,7 @@ list(TRANSFORM srcFiles PREPEND ${srcDir}/)
 list(TRANSFORM publicHeaderFiles PREPEND ${srcDir}/)
 
 add_library(lua
+    STATIC
     ${srcFiles})
 
 target_compile_definitions(lua
