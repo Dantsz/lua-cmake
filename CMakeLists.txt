@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(lua-cmake VERSION 1.0.0 DESCRIPTION "Lua build for a project subdirectory" LANGUAGES C)
 
-option(BUILD_SHARED_LIBS "Build as shared library" ON)
+option(LUA_CMAKE_BUILD_SHARED "Build as shared library" OFF)
 
 set(srcDir upstream)
 
@@ -16,9 +16,15 @@ set(publicHeaderFiles lauxlib.h lua.h luaconf.h lualib.h)
 list(TRANSFORM srcFiles PREPEND ${srcDir}/)
 list(TRANSFORM publicHeaderFiles PREPEND ${srcDir}/)
 
+if(LUA_CMAKE_BUILD_SHARED)
+    add_library(lua
+    SHARED
+    ${srcFiles})
+else()
 add_library(lua
     STATIC
     ${srcFiles})
+endif()
 
 target_compile_definitions(lua
     PRIVATE
