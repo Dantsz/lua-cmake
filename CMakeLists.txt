@@ -17,13 +17,15 @@ list(TRANSFORM srcFiles PREPEND ${srcDir}/)
 list(TRANSFORM publicHeaderFiles PREPEND ${srcDir}/)
 
 if(LUA_CMAKE_BUILD_SHARED)
+    message(STATUS "BUILDING LUA AS A SHARED LIBRARY")
     add_library(lua
     SHARED
     ${srcFiles})
 else()
-add_library(lua
-    STATIC
-    ${srcFiles})
+    message(STATUS "BUILDING LUA AS A STATIC LIBRARY")
+    add_library(lua
+        STATIC
+        ${srcFiles})
 endif()
 
 target_compile_definitions(lua
